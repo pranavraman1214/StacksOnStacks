@@ -1,0 +1,20 @@
+from alpha_vantage.techindicators import TechIndicators
+import pandas as pd
+
+
+def getSMA(symb):
+    whatever = None
+    while whatever is None:
+        try:
+            ti = TechIndicators(key='KU7YQYX4LFOFNQTU', output_format='pandas')
+            data, metadata = ti.get_sma(symbol=symb, interval='1min', series_type='open')
+            whatever = data
+            print(data.iloc[data.shape[0]-1])
+        except KeyError:
+            pass
+
+
+getSMA('MSFT')
+
+
+
