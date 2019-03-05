@@ -54,21 +54,14 @@ class indicateStock:
                 s.sendmail("pranavryoheistocksonstocks@gmail.com", "pvraman2@illinois.edu", "Sell the stock" + self.symbol)
                 s.quit()
 
-
-
-
-
-
-
-
+# Sets up the stocks. Basically we could place all the stocks from robin hood in this array
 symbols = ['NKE', 'AAPL', 'NFLX', 'MSFT', ]
 stockObject = []
 stock = 0
+# Cycles thru and makes a Stock object of each symbol
 for x in range(len(symbols)):
-    stockObject.append(indicateStock(symbols[stock]))
-    stock = stock + 1
-
-print len(stockObject)
+    stockObject.append(indicateStock(symbols[x]))
+# Infinite loop of comparisons
 i = 0
 while i is 0:
     for x in range(len(stockObject)):
