@@ -27,15 +27,15 @@ class indicateStock:
     def compareEMA50and200(self):
         ema12 = self.getEMA12()
         ema26 = self.getEMA26()
-        print self.symbol
-        print ema26
-        print ema12
+        print(self.symbol)
+        print(ema26)
+        print(ema12)
         if ema26 > ema12:
             self.increasing = True
-            print self.increasing
+            print(self.increasing)
         if ema26 < ema12:
             self.increasing = False
-            print self.increasing
+            print(self.increasing)
         if self.increasing == True:
             s = smtplib.SMTP("smtp.gmail.com", 587)
             s.starttls()

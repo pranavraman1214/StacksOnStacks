@@ -1,5 +1,10 @@
 from alpha_vantage.techindicators import TechIndicators
 import smtplib
+import pandas as pd
+
+df = pd.read_csv("C:/Users/ryohe/PycharmProjects/StacksOnStacks/stockSymbols.csv")
+symbolList = list(df["Symbols"])
+print(symbolList)
 
 def getEMA50(symb):
     whatever = None
@@ -27,8 +32,8 @@ def compareEMA50and200():
     increasing = False
     ema50 = getEMA50('NKE')
     ema200 = getEMA200('NKE')
-    print ema200
-    print ema50
+    print(ema200)
+    print(ema50)
     if ema200 > ema50:
         increasing = True
     if ema50 < ema200:
@@ -52,7 +57,6 @@ def compareEMA50and200():
 i = 0
 while i is 0:
     compareEMA50and200()
-
 
 
 
