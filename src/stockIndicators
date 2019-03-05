@@ -25,21 +25,12 @@ def getEMA200(symb):
             pass
 
 
-sender_email = "ryoheinamiki515@gmail.com"
-receiver_email = "rnamiki2@illinois.edu"
-message = "hello world"
-port = 465  # For SSL
-password = input("Type your password and press enter: ")
-
-# Create a secure SSL context
-context = ssl.create_default_context()
-
-
-with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
-    server.connect()
-    server.login("ryoheinamiki515@gmail.com", password)
-
-server.sendmail(sender_email, receiver_email, message)
+s = smtplib.SMTP("smtp.gmail.com", 587)
+s.starttls()
+s.ehlo
+s.login("pranavryoheistocksonstocks@gmail.com", "rnamiki2pvraman2")
+s.sendmail("pranavryoheistocksonstocks@gmail.com", "ryoheinamiki515@gmail.com", "hello")
+s.quit()
 
 
 
