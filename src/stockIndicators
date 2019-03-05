@@ -1,36 +1,52 @@
 from alpha_vantage.techindicators import TechIndicators
 import smtplib, ssl
 
-def getEMA50(symb):
+def getEMA20(symb):
     whatever = None
     while whatever is None:
         try:
             ti = TechIndicators(key='KU7YQYX4LFOFNQTU', output_format='pandas')
-            data, metadata = ti.get_ema(symbol=symb, interval='1min', time_period='50', series_type='close')
+            data, metadata = ti.get_ema(symbol=symb, interval='1min', time_period='20', series_type='close')
             whatever = data
-            return float(data.iloc[data.shape[0] - 1])
+            return [float(data.iloc[data.shape[0] - 2]), float(data.iloc[data.shape[0] - 1])]
         except KeyError:
             pass
 
 
-def getEMA200(symb):
+def getEMA8(symb):
     whatever = None
     while whatever is None:
         try:
             ti = TechIndicators(key='KU7YQYX4LFOFNQTU', output_format='pandas')
-            data, metadata = ti.get_ema(symbol=symb, interval='1min', time_period='200', series_type='close')
+            data, metadata = ti.get_ema(symbol=symb, interval='1min', time_period='8', series_type='close')
             whatever = data
-            return float(data.iloc[data.shape[0] - 1])
+            return [float(data.iloc[data.shape[0] - 2]), float(data.iloc[data.shape[0] - 1])]
         except KeyError:
             pass
 
 
-s = smtplib.SMTP("smtp.gmail.com", 587)
-s.starttls()
-s.ehlo
-s.login("pranavryoheistocksonstocks@gmail.com", "rnamiki2pvraman2")
-s.sendmail("pranavryoheistocksonstocks@gmail.com", "ryoheinamiki515@gmail.com", "hello")
-s.quit()
+def determineBuySell(symbol):
+    buySell = ""
+    while buySell == "":
+        diff_8vs20_Before = getEMA8(symbol)[0] - getEMA20(symbol)[0]
+        diff_8vs20_After = getEMA8(symbol)[1] - getEMA20(symbol)[1]
+        if diff_8vs20_Before < 0 < diff_8vs20_After:
+            buySell = "buy"
+        if diff_8vs20_After < 0 < diff_8vs20_Before:
+            buySell = "sell"
+    return [buySell, symbol]
+
+
+def mailInfo(content):
+    s = smtplib.SMTP("smtp.gmail.com", 587)
+    s.starttls()
+    s.ehlo
+    s.login("pranavryoheistocksonstocks@gmail.com", "rnamiki2pvraman2")
+    s.sendmail("pranavryoheistocksonstocks@gmail.com", "pvraman2@illinois.edu", content)
+    s.quit()
+
+
+mailInfo(determineBuySell("MSFT"))
 
 
 
