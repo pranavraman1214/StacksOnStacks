@@ -15,7 +15,7 @@ class indicateStock:
                 ti = TechIndicators(key='JMCHDT9XJ90DOIQL', output_format='pandas')
                 data, metadata = ti.get_ema(symbol=self.symbol, interval='1min', time_period='12', series_type='close')
                 whatever = data
-                return float(data.iloc[data.shape[0] - 1])
+                return [float(data.iloc[data.shape[0] - 2]), float(data.iloc[data.shape[0] - 1])]
             except KeyError:
                 pass
 
@@ -26,7 +26,7 @@ class indicateStock:
                 ti = TechIndicators(key='JMCHDT9XJ90DOIQL', output_format='pandas')
                 data, metadata = ti.get_ema(symbol=self.symbol, interval='1min', time_period='26', series_type='close')
                 whatever = data
-                return float(data.iloc[data.shape[0] - 1])
+                return [float(data.iloc[data.shape[0] - 2]), float(data.iloc[data.shape[0] - 1])]
             except KeyError:
                 pass
 
@@ -34,35 +34,23 @@ class indicateStock:
         ema12 = self.getEMA12()
         ema26 = self.getEMA26()
         print(self.symbol)
-        print(ema26)
-        print(ema12)
-        if ema26 > ema12:
-            self.increasing = True
-            print(self.increasing)
-        if ema26 < ema12:
-            self.increasing = False
-            print(self.increasing)
-        if self.increasing:
+        emaDiffBefore = ema12[0] - ema26[0]
+        emaDiffAfter = ema12[1] - ema26[1]
+        print(emaDiffBefore)
+        print(emaDiffAfter)
+        if emaDiffBefore < 0 and emaDiffAfter > 0:
             s = smtplib.SMTP("smtp.gmail.com", 587)
             s.starttls()
             s.ehlo
             s.login("pranavryoheistocksonstocks@gmail.com", "rnamiki2pvraman2")
             s.sendmail("pranavryoheistocksonstocks@gmail.com", "pranavryoheistocksonstocks@gmail.com", "Buy the stock " + self.symbol)
             s.quit()
-        if ema12 == ema26:
-            if self.increasing:
+        if emaDiffBefore < 0 and emaDiffAfter > 0:
                 s = smtplib.SMTP("smtp.gmail.com", 587)
                 s.starttls()
                 s.ehlo
                 s.login("pranavryoheistocksonstocks@gmail.com", "rnamiki2pvraman2")
-                s.sendmail("pranavryoheistocksonstocks@gmail.com", "pranavryoheistocksonstocks@gmail.com","Buy the stock " + self.symbol)
-                s.quit()
-            else:
-                s = smtplib.SMTP("smtp.gmail.com", 587)
-                s.starttls()
-                s.ehlo
-                s.login("pranavryoheistocksonstocks@gmail.com", "rnamiki2pvraman2")
-                s.sendmail("pranavryoheistocksonstocks@gmail.com", "pranavryoheistocksonstocks@gmail.com","Sell the stock" + self.symbol)
+                s.sendmail("pranavryoheistocksonstocks@gmail.com", "pranavryoheistocksonstocks@gmail.com","Sell the stock " + self.symbol)
                 s.quit()
 
 

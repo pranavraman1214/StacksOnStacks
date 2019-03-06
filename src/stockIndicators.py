@@ -13,7 +13,7 @@ def getEMA50(symb):
             ti = TechIndicators(key='KU7YQYX4LFOFNQTU', output_format='pandas')
             data, metadata = ti.get_ema(symbol=symb, interval='1min', time_period='50', series_type='close')
             whatever = data
-            return float(data.iloc[data.shape[0] - 1])
+            return [float(data.iloc[data.shape[0] - 2]), float(data.iloc[data.shape[0] - 1])]
         except KeyError:
             pass
 
@@ -24,7 +24,7 @@ def getEMA200(symb):
             ti = TechIndicators(key='KU7YQYX4LFOFNQTU', output_format='pandas')
             data, metadata = ti.get_ema(symbol=symb, interval='1min', time_period='200', series_type='close')
             whatever = data
-            return float(data.iloc[data.shape[0] - 1])
+            return [float(data.iloc[data.shape[0] - 2]), float(data.iloc[data.shape[0] - 1])]
         except KeyError:
             pass
 
@@ -58,7 +58,8 @@ i = 0
 while i is 0:
     compareEMA50and200()
 
-
+emaDiffBefore = getEMA50()[0] - getEMA200()[0]
+emaDiffAfter = getEMA50()[1] - getEMA200()[1]
 
 
 
