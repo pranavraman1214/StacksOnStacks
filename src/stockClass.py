@@ -37,7 +37,7 @@ class indicateStock:
         emaDiffBefore = ema12[0] - ema26[0]
         emaDiffAfter = ema12[1] - ema26[1]
         print(emaDiffBefore)
-        print(emaDiffAfter)
+        print(emaDiffAfter) 
         if emaDiffBefore < 0 and emaDiffAfter > 0:
             s = smtplib.SMTP("smtp.gmail.com", 587)
             s.starttls()
