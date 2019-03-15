@@ -136,7 +136,7 @@ class IndicateStock:
 
 
 # Sets up the stocks. Basically we could place all the stocks from robin hood in this array
-df = pd.read_csv("C:/Users/ryohe/PycharmProjects/StacksOnStacks/stockSymbols.csv")
+df = pd.read_csv("C:/Users/ryohe/PycharmProjects/StacksOnStacks/stockSymbols2.csv")
 allsymbols = list(df["Symbols"])
 stockObject = []
 # Cycles thru and makes a Stock object of each symbol
