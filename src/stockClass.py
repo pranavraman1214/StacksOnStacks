@@ -217,11 +217,11 @@ with open('../BoughtStocks', 'r') as myfile:
     stocksBought = int(myfile.readline())
     stockPrice = float(myfile.readline())
     buypower = float(myfile.readline())
-print data
-print "Pranav"
+
 if stocksBought is 0:
     nostockinfile()
 else:
+    #writeToFile("twoFifty7", "1000000", "100000", "Infinite")
     stockInFile()
 
 
