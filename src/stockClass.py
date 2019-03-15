@@ -45,7 +45,7 @@ class indicateStock:
             s.login("pranavryoheistocksonstocks@gmail.com", "rnamiki2pvraman2")
             s.sendmail("pranavryoheistocksonstocks@gmail.com", "pranavryoheistocksonstocks@gmail.com", "Buy the stock " + self.symbol)
             s.quit()
-        if emaDiffBefore < 0 and emaDiffAfter > 0:
+        if emaDiffBefore > 0 and emaDiffAfter < 0:
                 s = smtplib.SMTP("smtp.gmail.com", 587)
                 s.starttls()
                 s.ehlo
@@ -55,7 +55,7 @@ class indicateStock:
 
 
 # Sets up the stocks. Basically we could place all the stocks from robin hood in this array
-df = pd.read_csv("C:/Users/ryohe/PycharmProjects/StacksOnStacks/stockSymbols.csv")
+df = pd.read_csv("../stockSymbols.csv")
 allsymbols = list(df["Symbols"])
 stockObject = []
 stock = 0
