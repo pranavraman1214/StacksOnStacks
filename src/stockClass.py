@@ -81,8 +81,6 @@ class IndicateStock:
         time.sleep(1)
         pyautogui.hotkey('command', 'w')
 
-
-
     def getEMA12(self):
         whatever = None
         while whatever is None:
@@ -159,7 +157,8 @@ class IndicateStock:
             s.quit()
             self.buy_bool = True
 
-# Seperated our main function into two seperate functions. One where a stock is present in the file, one where there is no stock present
+
+# Seperated our main function into two seperate functions.
 def nostockinfile():
     df = pd.read_csv("../stockSymbols.csv")
     allsymbols = list(df["Symbols"])
@@ -174,6 +173,7 @@ def nostockinfile():
             stockObject[x].compareEMA50and200()
     return
 
+
 def stockInFile():
     currentStock = IndicateStock(data, buypower)
     currentStock.setOtherVariables(False, stockPrice, stocksBought)
@@ -182,7 +182,8 @@ def stockInFile():
     nostockinfile()
     return
 
-#Helper methods to reset the file after we have sold a stock
+
+# Helper methods to reset the file after we have sold a stock
 def resetFile():
     out = open('../BoughtStocks', 'w')
     out.write("Empty")
@@ -194,6 +195,8 @@ def resetFile():
     out.write("0")
     out.write("\n")
     return
+
+
 # Helper method to write the Bought Stocks file when we have bought a stock
 def writeToFile(symbol,stocksBought,pricePaid, buyPower):
     out = open('../BoughtStocks', 'w')
@@ -206,6 +209,7 @@ def writeToFile(symbol,stocksBought,pricePaid, buyPower):
     out.write(str(buyPower))
     out.write("\n")
     return
+
 
 #Main I guess
 data = ""
@@ -221,7 +225,6 @@ with open('../BoughtStocks', 'r') as myfile:
 if stocksBought is 0:
     nostockinfile()
 else:
-    #writeToFile("twoFifty7", "1000000", "100000", "Infinite")
     stockInFile()
 
 

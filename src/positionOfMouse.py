@@ -1,2 +1,2 @@
-import pyautogui
-print(pyautogui.position())
+import  pyautogui
+print (pyautogui.position())

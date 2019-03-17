@@ -60,8 +60,3 @@ print(getEMA200("SNAP"))
 print(getEMA50("SNAP") - getEMA200("SNAP"))
 
 
-
-
-
-
-
