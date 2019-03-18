@@ -21,7 +21,8 @@ class IndicateStock:
         self.stock_count = 0
         self.ema50 = None
         self.ema200 = None
-    def setOtherVariables(self, bought, stockprice, stockcount):
+        
+    def set_other_variables(self, bought, stockprice, stockcount):
         self.buy_bool = bought
         self.stock_price = stockprice
         self.stock_count = stockcount
@@ -71,7 +72,7 @@ class IndicateStock:
 
     def get_ema50_ema200(self):
         page_link = f"https://finance.yahoo.com/quote/{self.symbol}/key-statistics?p={self.symbol}"
-        page_response = requests.get(page_link, timeout=5)
+        page_response = requests.get(page_link, timeout=10)
         page_content = BeautifulSoup(page_response.content, "html.parser")
         textContent = []
         data = []
@@ -88,7 +89,7 @@ class IndicateStock:
 
     def get_price(self):
         page_link = f"https://www.nasdaq.com/symbol/{self.symbol}/real-time"
-        page_response = requests.get(page_link, timeout=5)
+        page_response = requests.get(page_link, timeout=10)
         page_content = BeautifulSoup(page_response.content, "html.parser")
         textContent = []
         data = []
@@ -111,7 +112,7 @@ class IndicateStock:
             self.ema200 = float(current_emas[1])
             emaDiffAfter = self.ema50 - self.ema200
             self.stock_price = self.get_price()
-            print(self.symbol)
+            print(self.symbol + ": " + self.stock_price)
             print(emaDiffBefore)
             print(emaDiffAfter)
 
@@ -173,7 +174,7 @@ def nostockinfile():
 
 def stockInFile():
     currentStock = IndicateStock(data, buypower)
-    currentStock.setOtherVariables(False, stockPrice, stocksBought)
+    currentStock.set_other_variables(False, stockPrice, stocksBought)
     while (currentStock.buy_bool == False):
         currentStock.compareEMA50and200()
     nostockinfile()
