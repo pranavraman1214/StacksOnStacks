@@ -7,7 +7,7 @@ import webbrowser
 import time
 import math
 
-money = 28
+money = 45
 
 class IndicateStock:
     def __init__(self, symbol, buy_power):
@@ -22,6 +22,7 @@ class IndicateStock:
         self.stock_count = stockcount
 
     def sell(self):
+        pyautogui.moveTo(519, 62, duration=0.5)
         time.sleep(2)
         webbrowser.open('http://google.com', new=1)
         time.sleep(2.5)
@@ -40,10 +41,13 @@ class IndicateStock:
         pyautogui.click(1422, 533, duration=0)
         time.sleep(1)
         pyautogui.click(1409, 650, duration=0)
+        time.sleep(1)
+        pyautogui.click(983, 557, duration=0)
         time.sleep(5)
         pyautogui.click(1891, 17, duration=0)
 
     def buy(self, buy_count):
+        pyautogui.moveTo(519, 62, duration=0.5)
         time.sleep(2)
         webbrowser.open('http://google.com', new=1)
         time.sleep(2.5)
@@ -61,6 +65,8 @@ class IndicateStock:
         pyautogui.click(1422, 533, duration=0)
         time.sleep(1)
         pyautogui.click(1409, 650, duration=0)
+        time.sleep(1)
+        pyautogui.click(983, 557, duration=0)
         time.sleep(5)
         pyautogui.click(1891, 17, duration=0)
 
@@ -69,7 +75,7 @@ class IndicateStock:
         while whatever is None:
             try:
                 ti = TechIndicators(key='JMCHDT9XJ90DOIQL', output_format='pandas')
-                data, metadata = ti.get_ema(symbol=self.symbol, interval='1min', time_period='12', series_type='close')
+                data, metadata = ti.get_ema(symbol=self.symbol, interval='1min', time_period='25', series_type='close')
                 whatever = data
                 return [float(data.iloc[data.shape[0] - 2]), float(data.iloc[data.shape[0] - 1])]
             except KeyError:
@@ -80,7 +86,7 @@ class IndicateStock:
         while whatever is None:
             try:
                 ti = TechIndicators(key='JMCHDT9XJ90DOIQL', output_format='pandas')
-                data, metadata = ti.get_ema(symbol=self.symbol, interval='1min', time_period='26', series_type='close')
+                data, metadata = ti.get_ema(symbol=self.symbol, interval='1min', time_period='50', series_type='close')
                 whatever = data
                 return [float(data.iloc[data.shape[0] - 2]), float(data.iloc[data.shape[0] - 1])]
             except KeyError:
@@ -161,6 +167,7 @@ def stockInFile():
     currentStock = IndicateStock(data, buypower)
     currentStock.setOtherVariables(False, stockPrice, stocksBought)
     while (currentStock.buy_bool == False):
+        time.sleep(60)
         currentStock.compareEMA50and200()
     nostockinfile()
     return

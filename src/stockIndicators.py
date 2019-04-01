@@ -6,6 +6,7 @@ df = pd.read_csv("C:/Users/ryohe/PycharmProjects/StacksOnStacks/stockSymbols.csv
 symbolList = list(df["Symbols"])
 print(symbolList)
 
+
 def getEMA50(symb):
     whatever = None
     while whatever is None:

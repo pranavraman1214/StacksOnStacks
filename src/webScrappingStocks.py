@@ -1,7 +1,5 @@
 from bs4 import BeautifulSoup
 import requests
-from alpha_vantage.techindicators import TechIndicators
-from alpha_vantage.timeseries import TimeSeries
 import smtplib
 import pandas as pd
 import pyautogui
@@ -149,7 +147,7 @@ class IndicateStock:
                 s.quit()
                 self.buy_bool = True
         else:
-            print("hello")
+            print("initializing...")
             self.ema50 = float(current_emas[0])
             self.ema200 = float(current_emas[1])
             return
